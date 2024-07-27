@@ -1,4 +1,4 @@
-import {$, $d, $rgb, $rgb_p8, $spr, $v_0_0, $v_1_1, BeetPx} from "@beetpx/beetpx";
+import {$, $d, $rgb, $rgb_p8, $spr, $u, $v_0_0, $v_1_1} from "@beetpx/beetpx";
 
 /**
  * `init` is used to configure BeetPx app and initialize underlying
@@ -52,7 +52,7 @@ $.init({
         /**
          * `$u` is a shorter way of accessing `BeetPx.draw`.
          */
-        BeetPx.utils.drawTextWithOutline("BeetPx", $v_1_1, $rgb("#ff6e59"), $rgb("#125359"));
+        $u.drawTextWithOutline("BeetPx", $v_1_1, $rgb("#ff6e59"), $rgb("#125359"));
     });
 
     /**
