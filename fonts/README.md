@@ -1,10 +1,8 @@
-# Canvas Snapshot
+# Fonts
 
-This example demonstrates usage of `$d.takeCanvasSnapshot()` and
-`BpxCanvasSnapshotColorMapping` in order to modify already drawn pixels.
-This might come handy when e.g. implementing a light source mechanics.
+In this example you can see usage of fonts, as well as how to define your own fonts or extend existing ones.
 
-Use keyboard arrows to move one of the light sources around.
+Use `C`/`J` and `X`/`K` to zoom in / zoom out. Use the keyboard arrows to move the canvas around.
 
 ## Quick Start
 
