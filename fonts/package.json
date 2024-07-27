@@ -10,7 +10,7 @@
   "scripts": {
     "start": "beetpx dev --open",
     "prod": "beetpx build && beetpx preview --open",
-    "zip": "beetpx build && beetpx zipq",
+    "zip": "beetpx build && beetpx zip",
     "tsc": "tsc",
     "tsc:watch": "tsc --watch"
   },
