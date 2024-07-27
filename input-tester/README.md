@@ -24,6 +24,8 @@ gamepad type, as well as a detected web browser (and whether
 it's Windows or not, when it comes to Firefox). Those are
 dictated by differences between gamepad mappings I experienced so far.
 
+You can also try this example out as a tool published on itch.io: https://beetrootpaul.itch.io/beetpx-input-tester
+
 ## Quick Start
 
 ```
