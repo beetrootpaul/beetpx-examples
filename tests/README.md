@@ -1,6 +1,7 @@
 # Tests
 
-This example demonstrates how to setup [Vitest](https://vitest.dev/) tests in the project.
+This example demonstrates how to setup [Vitest](https://vitest.dev/) tests in the project,
+as well as how to stub a current frame number processed by BeetPx.
 
 ## Quick Start
 
