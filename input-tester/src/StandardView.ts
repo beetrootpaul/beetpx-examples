@@ -1,4 +1,4 @@
-import {$, $d, $rgb, $rgb_p8, $spr, $u, $v, $v_0_0, BpxSpriteColorMapping,} from "@beetpx/beetpx";
+import {$, $d, $rgb, $rgb_p8, $rgb_red, $spr, $u, $v, $v_0_0, BpxSpriteColorMapping,} from "@beetpx/beetpx";
 
 const spr = $spr("spritesheet.png");
 
@@ -90,7 +90,8 @@ export class StandardView {
         frameByFrameStep: false,
     };
 
-    private highlightKeyboard: boolean = true;
+    private highlightKeyboard: boolean = false;
+    private highlightGamepad: boolean = false;
 
     update(): void {
         const {ip} = this;
@@ -111,8 +112,10 @@ export class StandardView {
 
         if ($.getRecentInputMethods().has("keyboard")) {
             this.highlightKeyboard = true;
+            this.highlightGamepad = false;
         } else if ($.getRecentInputMethods().has("gamepad")) {
             this.highlightKeyboard = false;
+            this.highlightGamepad = true;
         }
     }
 
@@ -123,11 +126,13 @@ export class StandardView {
         $d.sprite(spr(128, 128, 0, 0), $v_0_0);
 
         // background: keyboard vs gamepad
-        let prevMapping = $d.setSpriteColorMapping(
+        let prevMapping = $d.setSpriteColorMapping(BpxSpriteColorMapping.from(
             this.highlightKeyboard
-                ? BpxSpriteColorMapping.from([[pink, darkGreen]])
-                : BpxSpriteColorMapping.from([[yellow, darkBlue]]),
-        );
+                ? [[pink, darkGreen]]
+                : this.highlightGamepad
+                    ? [[yellow, darkBlue]]
+                    : [[pink, darkGreen], [yellow, darkBlue]]
+        ));
         $d.setClippingRegion($v(0, 0), $v(128, 3));
         $d.sprite(spr(128, 128, 0, 0), $v_0_0);
         $d.setClippingRegion($v(126, 0), $v(126, 128));
@@ -137,15 +142,6 @@ export class StandardView {
         $d.setClippingRegion($v(0, 0), $v(2, 128));
         $d.sprite(spr(128, 128, 0, 0), $v_0_0);
         $d.setClippingRegion($v(64, 77), $v(64, 6));
-        $d.sprite(spr(128, 128, 0, 0), $v_0_0);
-        $d.setSpriteColorMapping(prevMapping);
-        prevMapping = $d.setSpriteColorMapping(
-            BpxSpriteColorMapping.from([[lightGrey, darkGrey]]),
-        );
-        $d.setClippingRegion(
-            this.highlightKeyboard ? $v(110, 3) : $v(3, 3),
-            $v(15, 11),
-        );
         $d.sprite(spr(128, 128, 0, 0), $v_0_0);
         $d.removeClippingRegion();
         $d.setSpriteColorMapping(prevMapping);
