@@ -14,14 +14,14 @@ $.init({
      */
     assets: [
         "logo.png",
-        "music_melody.flac",
+        "music.flac",
     ],
 
 }).then(async ({startGame}) => {
     const logoSprite = $spr("logo.png")(16, 16, 0, 0);
     let logoPosition = $.canvasSize.div(2);
 
-    $.startPlaybackLooped("music_melody.flac");
+    $.startPlaybackLooped("music.flac");
 
     /**
      * `setOnUpdate` is used for a logic to be run in a fixed timestep
