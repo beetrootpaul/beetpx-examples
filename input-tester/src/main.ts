@@ -23,7 +23,7 @@ $.init({
     $.setOnStarted(() => {
         standardView = new StandardView();
         debugView = new DebugView();
-        showDebug = false;
+        showDebug = $.debug;
 
         prevDebugToggleState = false;
         nextDebugToggleState = false;
