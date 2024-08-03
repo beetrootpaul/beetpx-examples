@@ -1,4 +1,4 @@
-import {$, $d, $rgb, $rgb_p8, $rgb_red, $spr, $u, $v, $v_0_0, BpxSpriteColorMapping,} from "@beetpx/beetpx";
+import {$, $d, $rgb, $rgb_p8, $spr, $u, $v, $v_0_0, BpxPixels, BpxSpriteColorMapping,} from "@beetpx/beetpx";
 
 const spr = $spr("spritesheet.png");
 
@@ -25,9 +25,10 @@ export class StandardView {
         k_left: spr(5, 6, 144, 8),
         k_right: spr(5, 6, 152, 8),
         //
-        k_c: spr(5, 6, 128, 16),
-        k_j: spr(5, 6, 136, 16),
-        g_a: spr(5, 6, 144, 16),
+        k_o: spr(5, 6, 128, 16),
+        k_c: spr(5, 6, 134, 16),
+        k_j: spr(5, 6, 140, 16),
+        g_a: spr(5, 6, 146, 16),
         g_y: spr(5, 6, 152, 16),
         //
         k_x: spr(5, 6, 128, 24),
@@ -40,7 +41,9 @@ export class StandardView {
         k_enter: spr(8, 10, 149, 30),
         //
         k_m: spr(5, 6, 128, 40),
-        k_f: spr(5, 6, 136, 40),
+        k_f: spr(5, 6, 134, 40),
+        k_r_square_bracket: spr(5, 6, 140, 40),
+        k_r_curly_bracket: spr(5, 6, 146, 40),
         k_semicolon: spr(5, 6, 152, 40),
         //
         g_dualsense_cross: spr(5, 6, 128, 48),
@@ -80,11 +83,13 @@ export class StandardView {
         down: false,
         left: false,
         right: false,
-        a: false,
-        b: false,
+        O: false,
+        X: false,
         menu: false,
         muteUnmute: false,
         fullScreen: false,
+        takeScreenshot: false,
+        browserScreenshots: false,
         debugToggle: false,
         frameByFrameToggle: false,
         frameByFrameStep: false,
@@ -101,11 +106,13 @@ export class StandardView {
         ip.down = events.has("button_down");
         ip.left = events.has("button_left");
         ip.right = events.has("button_right");
-        ip.a = events.has("button_a");
-        ip.b = events.has("button_b");
+        ip.O = events.has("button_O");
+        ip.X = events.has("button_X");
         ip.menu = events.has("button_menu");
         ip.muteUnmute = events.has("mute_unmute_toggle");
         ip.fullScreen = events.has("full_screen");
+        ip.takeScreenshot = events.has("take_screenshot");
+        ip.browserScreenshots = events.has("browse_screenshots_toggle");
         ip.debugToggle = events.has("debug_toggle");
         ip.frameByFrameToggle = events.has("frame_by_frame_toggle");
         ip.frameByFrameStep = events.has("frame_by_frame_step");
@@ -151,79 +158,86 @@ export class StandardView {
             BpxSpriteColorMapping.from([[lime, null]]),
         );
         if (ip.up) {
-            $d.sprite(ps.k_w, $v(21, 17));
-            $d.sprite(ps.k_up, $v(47, 17));
-            $d.sprite(ps.g_dpad_up, $v(74, 16));
-            $d.sprite(ps.g_stick_up, $v(97, 16));
+            $d.sprite(ps.k_w, $v(21, 12));
+            $d.sprite(ps.k_up, $v(47, 12));
+            $d.sprite(ps.g_dpad_up, $v(71, 11));
+            $d.sprite(ps.g_stick_up, $v(95, 11));
         }
         if (ip.down) {
-            $d.sprite(ps.k_s, $v(22, 24));
-            $d.sprite(ps.k_down, $v(47, 24));
-            $d.sprite(ps.g_dpad_down, $v(74, 16));
-            $d.sprite(ps.g_stick_down, $v(97, 16));
+            $d.sprite(ps.k_s, $v(22, 19));
+            $d.sprite(ps.k_down, $v(47, 19));
+            $d.sprite(ps.g_dpad_down, $v(71, 11));
+            $d.sprite(ps.g_stick_down, $v(95, 11));
         }
         if (ip.left) {
-            $d.sprite(ps.k_a, $v(15, 24));
-            $d.sprite(ps.k_left, $v(40, 24));
-            $d.sprite(ps.g_dpad_left, $v(74, 16));
-            $d.sprite(ps.g_stick_left, $v(97, 16));
+            $d.sprite(ps.k_a, $v(15, 19));
+            $d.sprite(ps.k_left, $v(40, 19));
+            $d.sprite(ps.g_dpad_left, $v(71, 11));
+            $d.sprite(ps.g_stick_left, $v(95, 11));
         }
         if (ip.right) {
-            $d.sprite(ps.k_d, $v(29, 24));
-            $d.sprite(ps.k_right, $v(54, 24));
-            $d.sprite(ps.g_dpad_right, $v(74, 16));
-            $d.sprite(ps.g_stick_right, $v(97, 16));
+            $d.sprite(ps.k_d, $v(29, 19));
+            $d.sprite(ps.k_right, $v(54, 19));
+            $d.sprite(ps.g_dpad_right, $v(71, 11));
+            $d.sprite(ps.g_stick_right, $v(95, 11));
         }
         if (ip.up && ip.left) {
-            $d.sprite(ps.g_dpad_up_left, $v(74, 16));
-            $d.sprite(ps.g_stick_up_left, $v(97, 16));
+            $d.sprite(ps.g_dpad_up_left, $v(71, 11));
+            $d.sprite(ps.g_stick_up_left, $v(95, 11));
         }
         if (ip.up && ip.right) {
-            $d.sprite(ps.g_dpad_up_right, $v(74, 16));
-            $d.sprite(ps.g_stick_up_right, $v(97, 16));
+            $d.sprite(ps.g_dpad_up_right, $v(71, 11));
+            $d.sprite(ps.g_stick_up_right, $v(95, 11));
         }
         if (ip.down && ip.left) {
-            $d.sprite(ps.g_dpad_down_left, $v(74, 16));
-            $d.sprite(ps.g_stick_down_left, $v(97, 16));
+            $d.sprite(ps.g_dpad_down_left, $v(71, 11));
+            $d.sprite(ps.g_stick_down_left, $v(95, 11));
         }
         if (ip.down && ip.right) {
-            $d.sprite(ps.g_dpad_down_right, $v(74, 16));
-            $d.sprite(ps.g_stick_down_right, $v(97, 16));
+            $d.sprite(ps.g_dpad_down_right, $v(71, 11));
+            $d.sprite(ps.g_stick_down_right, $v(95, 11));
         }
-        if (ip.a) {
-            $d.sprite(ps.k_c, $v(37, 40));
-            $d.sprite(ps.k_j, $v(49, 40));
-            $d.sprite(ps.g_a, $v(73, 40));
-            $d.sprite(ps.g_y, $v(84, 40));
-            $d.sprite(ps.g_dualsense_cross, $v(100, 40));
-            $d.sprite(ps.g_dualsense_triangle, $v(111, 40));
+        if (ip.O) {
+            $d.sprite(ps.k_o, $v(24, 34));
+            $d.sprite(ps.k_c, $v(36, 34));
+            $d.sprite(ps.k_j, $v(48, 34));
+            $d.sprite(ps.g_a, $v(74, 34));
+            $d.sprite(ps.g_y, $v(86, 34));
+            $d.sprite(ps.g_dualsense_circle, $v(102, 34));
+            $d.sprite(ps.g_dualsense_square, $v(114, 34));
         }
-        if (ip.b) {
-            $d.sprite(ps.k_x, $v(37, 51));
-            $d.sprite(ps.k_k, $v(49, 51));
-            $d.sprite(ps.g_b, $v(73, 51));
-            $d.sprite(ps.g_x, $v(84, 51));
-            $d.sprite(ps.g_dualsense_circle, $v(100, 51));
-            $d.sprite(ps.g_dualsense_square, $v(111, 51));
+        if (ip.X) {
+            $d.sprite(ps.k_x, $v(36, 48));
+            $d.sprite(ps.k_k, $v(48, 48));
+            $d.sprite(ps.g_b, $v(74, 48));
+            $d.sprite(ps.g_x, $v(86, 48));
+            $d.sprite(ps.g_dualsense_cross, $v(102, 48));
+            $d.sprite(ps.g_dualsense_triangle, $v(114, 48));
         }
         if (ip.menu) {
-            $d.sprite(ps.k_p, $v(6, 65));
-            $d.sprite(ps.k_esc, $v(16, 65));
-            $d.sprite(ps.k_enter, $v(34, 61));
-            $d.sprite(ps.g_xbox_menu, $v(84, 65));
-            $d.sprite(ps.g_ps_menu, $v(100, 65));
+            $d.sprite(ps.k_p, $v(8, 62));
+            $d.sprite(ps.k_esc, $v(18, 62));
+            $d.sprite(ps.k_enter, $v(36, 60));
+            $d.sprite(ps.g_xbox_menu, $v(86, 62));
+            $d.sprite(ps.g_ps_menu, $v(102, 62));
         }
         if (ip.muteUnmute) {
-            $d.sprite(ps.k_m, $v(5, 85));
+            $d.sprite(ps.k_m, $v(5, 77));
         }
         if (ip.fullScreen) {
-            $d.sprite(ps.k_f, $v(5, 95));
+            $d.sprite(ps.k_f, $v(5, 86));
+        }
+        if (ip.takeScreenshot) {
+            $d.sprite(ps.k_r_square_bracket, $v(5, 95));
+        }
+        if (ip.browserScreenshots) {
+            $d.sprite(ps.k_r_curly_bracket, $v(5, 102));
         }
         if (ip.debugToggle) {
-            $d.sprite(ps.k_semicolon, $v(118, 100));
+            $d.sprite(ps.k_semicolon, $v(118, 102));
         }
         if (ip.frameByFrameToggle) {
-            $d.sprite(ps.k_coma, $v(118, 110));
+            $d.sprite(ps.k_coma, $v(118, 111));
         }
         if (ip.frameByFrameStep) {
             $d.sprite(ps.k_period, $v(118, 118));
@@ -231,8 +245,9 @@ export class StandardView {
         $d.setSpriteColorMapping(prevMapping);
 
         // tiny animation below "frame-by"frame" label, so we can actually test if the frame-by-frame mode works OK
-        $d.pixel(
-            $v(59 + 0.5 * (1 + $u.trigSin($.frameNumber / 120)) * (113 - 59), 117),
+        $d.pixels(
+            BpxPixels.from(`#\n#`),
+            $v(61 + 0.5 * (1 + $u.trigSin($.frameNumber / 120)) * (113 - 59), 117),
             $rgb("#7e2553"),
         );
     }

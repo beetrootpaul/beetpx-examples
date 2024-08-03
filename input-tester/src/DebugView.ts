@@ -151,13 +151,15 @@ export class DebugView {
             if (gamepadType) {
                 $d.rectFilled(
                     $v(
-                        97 +
+                        91 +
                         (gamepadType === "xbox"
                             ? 0
                             : gamepadType === "dualsense"
                                 ? 10
-                                : 20),
-                        61 + gamepadIndex * 3,
+                                : gamepadType === "8bitdo"
+                                    ? 20
+                                    : 30),
+                        60 + gamepadIndex * 3,
                     ),
                     $v(3, 3),
                     gamepadIndex === 0 ? orange : gamepadIndex === 1 ? blue : lime,
@@ -168,8 +170,8 @@ export class DebugView {
         // browser type
         $d.rectFilled(
             $v(
-                117,
-                78 +
+                116,
+                80 +
                 ($.detectedBrowserType === "chromium"
                     ? 0
                     : $.detectedBrowserType === "safari"
