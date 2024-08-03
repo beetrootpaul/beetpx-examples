@@ -1,11 +1,4 @@
-import {
-    $font,
-    $spr,
-    $v,
-    BpxGlyph,
-    BpxKerningPrevCharMap,
-    BpxPixels,
-} from "@beetpx/beetpx";
+import {$font, $spr, $v, BpxGlyph, BpxKerningPrevSegmentMap, BpxPixels,} from "@beetpx/beetpx";
 
 const descent = 3;
 
@@ -80,7 +73,7 @@ function spriteGlyph(
     y: number,
     extras?: {
         offsetY?: number;
-        kerning?: BpxKerningPrevCharMap;
+        kerning?: BpxKerningPrevSegmentMap;
         useExternalSpriteSheet?: boolean;
     },
 ): BpxGlyph {
@@ -89,7 +82,7 @@ function spriteGlyph(
         //   - using more than 1 sprite sheet for a single font,
         //   - using both local (deployed together with the game) and external sprite sheets.
         extras?.useExternalSpriteSheet ?
-            "https://raw.githubusercontent.com/beetrootpaul/beetpx/main/examples/fonts/public/custom-font.png"
+            "https://raw.githubusercontent.com/beetrootpaul/beetpx-examples/main/fonts/public/custom-font.png"
             : "custom-font.png",
     )(w, h, x, y);
     return {

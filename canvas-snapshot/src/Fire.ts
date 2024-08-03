@@ -6,9 +6,8 @@ export class Fire {
     readonly #animation = $aspr("fire.png")(
         16,
         32,
-        $u.repeatEachElement(5,
-            $u.range(8).map(i => [i * 16, 0])
-        ),
+        $u.range(8).map(i => [i * 16, 0]),
+        {frameDuration: 5}
     );
 
     setPosition(xy: BpxVector2d): void {

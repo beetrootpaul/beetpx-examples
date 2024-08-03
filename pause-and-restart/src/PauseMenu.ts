@@ -13,7 +13,7 @@ export class PauseMenu {
             this.#selectedItem = 0;
         }
 
-        if ($.wasButtonJustPressed("a")) {
+        if ($.wasButtonJustPressed("O")) {
             if (this.#selectedItem === 0) {
                 $.resume();
             } else if (this.#selectedItem === 1) {
@@ -27,7 +27,7 @@ export class PauseMenu {
             }
         }
 
-        if ($.wasButtonJustPressed("b")) {
+        if ($.wasButtonJustPressed("X")) {
             $.resume();
         }
 
