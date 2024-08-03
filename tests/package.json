@@ -16,7 +16,7 @@
     "tsc:watch": "tsc --watch"
   },
   "devDependencies": {
-    "@beetpx/beetpx": "0.49.0",
+    "@beetpx/beetpx": "0.51.0",
     "typescript": "5.5.3",
     "vitest": "2.0.4"
   }
