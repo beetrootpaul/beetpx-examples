@@ -1,4 +1,4 @@
-import {$, $d, $rgb, $rgb_p8, $spr, $u, $v, $v_0_0, BpxPixels, BpxSpriteColorMapping,} from "@beetpx/beetpx";
+import {$x, $d, $rgb, $rgb_p8, $spr, $u, $v, $v_0_0, BpxPixels, BpxSpriteColorMapping,} from "@beetpx/beetpx";
 
 const spr = $spr("spritesheet.png");
 
@@ -101,7 +101,7 @@ export class StandardView {
     update(): void {
         const {ip} = this;
 
-        const events = $.getEventsCapturedInLastUpdate();
+        const events = $x.getEventsCapturedInLastUpdate();
         ip.up = events.has("button_up");
         ip.down = events.has("button_down");
         ip.left = events.has("button_left");
@@ -117,10 +117,10 @@ export class StandardView {
         ip.frameByFrameToggle = events.has("frame_by_frame_toggle");
         ip.frameByFrameStep = events.has("frame_by_frame_step");
 
-        if ($.getRecentInputMethods().has("keyboard")) {
+        if ($x.getRecentInputMethods().has("keyboard")) {
             this.highlightKeyboard = true;
             this.highlightGamepad = false;
-        } else if ($.getRecentInputMethods().has("gamepad")) {
+        } else if ($x.getRecentInputMethods().has("gamepad")) {
             this.highlightKeyboard = false;
             this.highlightGamepad = true;
         }
@@ -247,7 +247,7 @@ export class StandardView {
         // tiny animation below "frame-by"frame" label, so we can actually test if the frame-by-frame mode works OK
         $d.pixels(
             BpxPixels.from(`#\n#`),
-            $v(61 + 0.5 * (1 + $u.trigSin($.frameNumber / 120)) * (113 - 59), 117),
+            $v(61 + 0.5 * (1 + $u.trigSin($x.frameNumber / 120)) * (113 - 59), 117),
             $rgb("#7e2553"),
         );
     }

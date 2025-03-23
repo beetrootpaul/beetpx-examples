@@ -1,5 +1,4 @@
 import {
-    $,
     $d,
     $font_pico8,
     $font_saint11Minimal4,
@@ -7,6 +6,7 @@ import {
     $rgb_p8,
     $v,
     $v_0_0,
+    $x,
     BpxFont,
     BpxVector2d,
 } from "@beetpx/beetpx";
@@ -28,9 +28,7 @@ const minScaleXy = $v(1);
 const maxScaleXy = $v(8);
 let scaleXy = minScaleXy;
 
-let cameraXy = $v_0_0;
-
-$.setOnStarted(() => {
+$x.setOnStarted(() => {
     $d.setTextColorMarkers({
         _: $rgb_p8.peach,
         brown: $rgb_p8.tan,
@@ -38,27 +36,25 @@ $.setOnStarted(() => {
     });
 });
 
-$.setOnUpdate(() => {
-    if ($.wasButtonJustPressed("O")) {
+$x.setOnUpdate(() => {
+    if ($x.wasButtonJustPressed("O")) {
         const newScale = scaleXy.mul(2).clamp(minScaleXy, maxScaleXy);
-        cameraXy = cameraXy.mul(newScale.div(scaleXy));
+        $d.setCameraXy($d.cameraXy.mul(newScale.div(scaleXy)));
         scaleXy = newScale;
     }
-    if ($.wasButtonJustPressed("X")) {
+    if ($x.wasButtonJustPressed("X")) {
         const newScale = scaleXy.div(2).clamp(minScaleXy, maxScaleXy);
-        cameraXy = cameraXy.mul(newScale.div(scaleXy));
+        $d.setCameraXy($d.cameraXy.mul(newScale.div(scaleXy)));
         scaleXy = newScale;
     }
-    if ($.wasButtonJustPressed("menu")) {
-        cameraXy = $v_0_0;
+    if ($x.wasButtonJustPressed("menu")) {
+        $d.setCameraXy($v_0_0);
         scaleXy = minScaleXy;
     }
-    cameraXy = cameraXy.sub($.getPressedDirection().mul(2).mul(scaleXy));
+    $d.setCameraXy($d.cameraXy.sub($x.getPressedDirection().mul(2).mul(scaleXy)));
 });
 
-$.setOnDraw(() => {
-    $d.setCameraXy(cameraXy);
-
+$x.setOnDraw(() => {
     $d.clearCanvas($rgb_p8.wine);
 
     let cursor = $v(8, 4).mul(scaleXy);
@@ -85,7 +81,7 @@ $.setOnDraw(() => {
     }
 });
 
-$.start({
+$x.start({
     gameId: "@beetpx/example-fonts",
     canvasSize: "256x256",
     assets: [...customFont.spriteSheetUrls],

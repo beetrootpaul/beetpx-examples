@@ -1,4 +1,4 @@
-import {$, $d, $rgb_p8, $v, $v_0_0, BpxDrawingPattern, BpxPatternColors} from "@beetpx/beetpx";
+import {$x, $d, $rgb_p8, $v, $v_0_0, BpxDrawingPattern, BpxPatternColors} from "@beetpx/beetpx";
 
 declare global {
     interface Window {
@@ -14,17 +14,17 @@ const patterns = [
     BpxDrawingPattern.of(0b1001_0011_0110_1100),
 ];
 
-$.setOnStarted(() => {
+$x.setOnStarted(() => {
     $d.setTextColorMarkers({
         lighter: $rgb_p8.silver,
     });
 });
 
-$.setOnDraw(() => {
+$x.setOnDraw(() => {
     $d.clearCanvas(BEETPX__IS_PROD ? $rgb_p8.wine : $rgb_p8.storm);
 
-    $d.setDrawingPattern(patterns[Math.floor($.frameNumber / 4) % 4]!);
-    $d.rect($v_0_0, $.canvasSize, BpxPatternColors.of(
+    $d.setDrawingPattern(patterns[Math.floor($x.frameNumber / 4) % 4]!);
+    $d.rect($v_0_0, $x.canvasSize, BpxPatternColors.of(
         BEETPX__IS_PROD ? $rgb_p8.wine : $rgb_p8.storm,
         $rgb_p8.black
     ));
@@ -37,13 +37,13 @@ $.setOnDraw(() => {
     $d.text(`envType=[lighter]${window.envType}`, $v(1, 26), $rgb_p8.dusk);
 
     if (!BEETPX__IS_PROD) {
-        $d.text(`press , to toggle frame-by-frame`, $v(1, $.canvasSize.y - 25), $rgb_p8.dusk);
-        $d.text(` then . to advance the frame`, $v(1, $.canvasSize.y - 18), $rgb_p8.dusk);
-        $d.text(`press ; to toggle debug mode`, $v(1, $.canvasSize.y - 6), $rgb_p8.dusk);
+        $d.text(`press , to toggle frame-by-frame`, $v(1, $x.canvasSize.y - 25), $rgb_p8.dusk);
+        $d.text(` then . to advance the frame`, $v(1, $x.canvasSize.y - 18), $rgb_p8.dusk);
+        $d.text(`press ; to toggle debug mode`, $v(1, $x.canvasSize.y - 6), $rgb_p8.dusk);
     }
 });
 
-$.start({
+$x.start({
     gameId: "@beetpx/example-const-injection",
     fixedTimestep: "30fps",
     requireConfirmationOnTabClose: BEETPX__IS_PROD,

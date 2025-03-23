@@ -5,7 +5,7 @@
   "author": "Beetroot Paul",
   "license": "MIT",
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   },
   "scripts": {
     "start": "beetpx dev --open",
@@ -15,7 +15,7 @@
     "tsc:watch": "tsc --watch"
   },
   "devDependencies": {
-    "@beetpx/beetpx": "0.51.0",
-    "typescript": "5.5.3"
+    "@beetpx/beetpx": "0.56.1",
+    "typescript": "5.8.2"
   }
 }

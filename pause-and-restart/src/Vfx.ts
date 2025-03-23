@@ -1,4 +1,4 @@
-import {$, $d, $rgb_p8, $timerSeq, $v, BpxDrawingPattern, BpxEasing, BpxTimerSequence,} from "@beetpx/beetpx";
+import {$x, $d, $rgb_p8, $timerSeq, $v, BpxDrawingPattern, BpxEasing, BpxTimerSequence,} from "@beetpx/beetpx";
 
 export class Vfx {
     static #checkersPattern = BpxDrawingPattern.from(`
@@ -36,9 +36,9 @@ export class Vfx {
         const rectSize = 16;
         [
             $v(2, 2),
-            $v(2, $.canvasSize.y - rectSize - 2),
-            $v($.canvasSize.x - rectSize - 2, 2),
-            $v($.canvasSize.x - rectSize - 2, $.canvasSize.y - rectSize - 2),
+            $v(2, $x.canvasSize.y - rectSize - 2),
+            $v($x.canvasSize.x - rectSize - 2, 2),
+            $v($x.canvasSize.x - rectSize - 2, $x.canvasSize.y - rectSize - 2),
         ].forEach((xy) => {
             const progress = (this.#loopFrames - this.#timer.framesLeft) / this.#loopFrames;
             $d.rectFilled(

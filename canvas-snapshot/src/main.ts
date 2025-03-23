@@ -1,4 +1,4 @@
-import {$, $d, $rgb, $u, $v, BpxCanvasSnapshotColorMapping, BpxRgbColor,} from "@beetpx/beetpx";
+import {$x, $d, $rgb, $u, $v, BpxCanvasSnapshotColorMapping, BpxRgbColor,} from "@beetpx/beetpx";
 import {Fire} from "./Fire";
 import {Room} from "./Room";
 
@@ -15,11 +15,11 @@ const colorMapperLighten = (color: BpxRgbColor | null): BpxRgbColor | null =>
 
 const colorMapperReachableOnly = (
     color: BpxRgbColor | null,
-    x: number,
-    y: number,
-): BpxRgbColor | null => (room.isReachableByLight(x, y) ? color : null);
+    x: number | undefined,
+    y: number | undefined,
+): BpxRgbColor | null => (x == null || y == null) ? null : (room.isReachableByLight(x, y) ? color : null);
 
-$.setOnStarted(() => {
+$x.setOnStarted(() => {
     room = new Room();
     fire1 = new Fire();
     fire2 = new Fire();
@@ -27,12 +27,12 @@ $.setOnStarted(() => {
     fire2.setPosition($v(64));
 });
 
-$.setOnUpdate(() => {
-    fire1.setPosition(fire1.position.add($.getPressedDirection()).clamp($v(12), $v(116)));
-    lightRadius = 30 + $u.trigCos($.frameNumber / 40);
+$x.setOnUpdate(() => {
+    fire1.setPosition(fire1.position.add($x.getPressedDirection()).clamp($v(12), $v(116)));
+    lightRadius = 30 + $u.trigCos($x.frameNumber / 40);
 });
 
-$.setOnDraw(() => {
+$x.setOnDraw(() => {
     room.draw();
 
     $d.takeCanvasSnapshot();
@@ -53,7 +53,7 @@ function drawLightAround(fire: Fire): void {
     );
 }
 
-$.start({
+$x.start({
     gameId: "@beetpx/example-canvas-snapshot",
     canvasSize: "128x128",
     fixedTimestep: "60fps",

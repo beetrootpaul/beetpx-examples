@@ -3,7 +3,7 @@ import {Counter} from "./Counter";
 import {$u} from "@beetpx/beetpx";
 import {incrementFrameNumber} from "./test-setup/stub-frame-number";
 
-describe("TimerWrapper", () => {
+describe("Counter", () => {
     test("counting", () => {
         const counter = new Counter(10);
         expect(counter.left).toBe(9);

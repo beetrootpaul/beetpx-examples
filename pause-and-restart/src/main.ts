@@ -1,4 +1,4 @@
-import {$, $d, $rgb_p8} from "@beetpx/beetpx";
+import {$x, $d, $rgb_p8} from "@beetpx/beetpx";
 import {Movement} from "./Movement";
 import {Music} from "./Music";
 import {PauseMenu} from "./PauseMenu";
@@ -10,30 +10,30 @@ let music: Music;
 let movement: Movement;
 let vfx: Vfx;
 
-$.setOnStarted(() => {
+$x.setOnStarted(() => {
     music = new Music();
     movement = new Movement();
     vfx = new Vfx({loopFrames: Music.beatFrames});
 });
 
-$.setOnUpdate(() => {
-    if ($.isPaused) {
+$x.setOnUpdate(() => {
+    if ($x.isPaused) {
         pauseMenu.update();
     }
 });
 
-$.setOnDraw(() => {
+$x.setOnDraw(() => {
     $d.clearCanvas($rgb_p8.storm);
 
     vfx.draw();
     movement.draw();
 
-    if ($.isPaused) {
+    if ($x.isPaused) {
         pauseMenu.draw();
     }
 });
 
-$.start({
+$x.start({
     gameId: "@beetpx/example-pause-and-restart",
     canvasSize: "256x256",
     assets: [

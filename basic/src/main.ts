@@ -1,4 +1,4 @@
-import {$, $d, $rgb, $rgb_p8, $spr, $u, $v_0_0, $v_1_1, BpxVector2d} from "@beetpx/beetpx";
+import {$x, $d, $rgb, $rgb_p8, $spr, $u, $v_0_0, $v_1_1, BpxVector2d} from "@beetpx/beetpx";
 
 const logoSprite = $spr("logo.png")(16, 16, 0, 0);
 let logoPosition: BpxVector2d;
@@ -6,22 +6,22 @@ let logoPosition: BpxVector2d;
 /**
  * `$` is a shorter way of accessing `BeetPx`.
  */
-$.setOnStarted(() => {
-    logoPosition = $.canvasSize.div(2);
-    $.startPlaybackLooped("music.flac");
+$x.setOnStarted(() => {
+    logoPosition = $x.canvasSize.div(2);
+    $x.startPlaybackLooped("music.flac");
 });
 
 /**
  * `setOnUpdate` is used for a logic to be run in a fixed timestep
  * game loop.
  */
-$.setOnUpdate(() => {
+$x.setOnUpdate(() => {
     /**
      * `getPressedDirection` returns a 2D vector representing the pressed
      * state of directional buttons. For example: "right" is (1,0).
      */
-    const positionDiff = $.getPressedDirection().mul(3);
-    logoPosition = logoPosition.add(positionDiff).clamp($v_0_0, $.canvasSize);
+    const positionDiff = $x.getPressedDirection().mul(3);
+    logoPosition = logoPosition.add(positionDiff).clamp($v_0_0, $x.canvasSize);
 });
 
 /**
@@ -31,7 +31,7 @@ $.setOnUpdate(() => {
  * The callback passed here is *not* guaranteed to be called on a fixed
  * timestamp, in a contrary to the one passed to `setOnUpdated`.
  */
-$.setOnDraw(() => {
+$x.setOnDraw(() => {
     /**
      * `$d` is a shorter way of accessing `BeetPxDraw`.
      */
@@ -46,7 +46,7 @@ $.setOnDraw(() => {
 /**
  * `start` is used to configure BeetPx app and start it.
  */
-$.start({
+$x.start({
     gameId: "@beetpx/example-basic",
 
     /**

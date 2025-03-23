@@ -1,4 +1,4 @@
-import {$, $d, $rgb, $spr, $u, $v, $v_0_0, BpxGamepadType, BpxGamepadTypeDetector,} from "@beetpx/beetpx";
+import {$x, $d, $rgb, $spr, $u, $v, $v_0_0, BpxGamepadType, BpxGamepadTypeDetector,} from "@beetpx/beetpx";
 
 const orange = $rgb("#ffa300");
 const blue = $rgb("#29adff");
@@ -172,13 +172,13 @@ export class DebugView {
             $v(
                 116,
                 80 +
-                ($.detectedBrowserType === "chromium"
+                ($x.detectedBrowserType === "chromium"
                     ? 0
-                    : $.detectedBrowserType === "safari"
+                    : $x.detectedBrowserType === "safari"
                         ? 10
-                        : $.detectedBrowserType === "firefox_windows"
+                        : $x.detectedBrowserType === "firefox_windows"
                             ? 20
-                            : $.detectedBrowserType === "firefox_other"
+                            : $x.detectedBrowserType === "firefox_other"
                                 ? 30
                                 : 40),
             ),

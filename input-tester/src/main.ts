@@ -1,4 +1,4 @@
-import {$} from "@beetpx/beetpx";
+import {$x} from "@beetpx/beetpx";
 import {DebugView} from "./DebugView";
 import {StandardView} from "./StandardView";
 
@@ -9,18 +9,18 @@ let showDebug: boolean = false;
 let prevDebugToggleState: boolean = false;
 let nextDebugToggleState: boolean = false;
 
-$.setOnStarted(() => {
+$x.setOnStarted(() => {
     standardView = new StandardView();
     debugView = new DebugView();
-    showDebug = $.debug;
+    showDebug = $x.debug;
 
     prevDebugToggleState = false;
     nextDebugToggleState = false;
 
-    $.startPlaybackLooped("music_base.flac")
+    $x.startPlaybackLooped("music_base.flac")
 });
 
-$.setOnUpdate(() => {
+$x.setOnUpdate(() => {
     if (showDebug) {
         debugView?.update();
     } else {
@@ -30,17 +30,17 @@ $.setOnUpdate(() => {
     // This whole work with detecting debug toggle button release is here only
     //   because we want to see debug toggle button pressed in standard view
     //   before (on the button release) the view switches to the debug one.
-    // If not for that, we could just use `$.debug` as a condition for
+    // If not for that, we could just use `$x.debug` as a condition for
     //   which view to update/draw.
     prevDebugToggleState = nextDebugToggleState;
     nextDebugToggleState =
-        $.getEventsCapturedInLastUpdate().has("debug_toggle");
+        $x.getEventsCapturedInLastUpdate().has("debug_toggle");
     if (prevDebugToggleState && !nextDebugToggleState) {
         showDebug = !showDebug;
     }
 });
 
-$.setOnDraw(() => {
+$x.setOnDraw(() => {
     if (showDebug) {
         debugView?.draw();
     } else {
@@ -48,7 +48,7 @@ $.setOnDraw(() => {
     }
 });
 
-$.start({
+$x.start({
     gameId: "@beetpx/example-input-tester",
     canvasSize: "128x128",
     fixedTimestep: "60fps",
